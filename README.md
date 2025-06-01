@@ -24,6 +24,15 @@ A modern, full-featured translation and language enhancement web app built with 
 - **Radix UI** for accessible UI primitives
 - **Lucide React** for icons
 
+## Project Structure
+
+- `src/` – Main source code for the app
+- `src/components/` – UI components (layout, translation, shortcut, UI primitives)
+- `src/hooks/` – Custom React hooks
+- `src/lib/` – Utility functions and constants
+- `src/store/` – Redux store and slices
+- `public/` – Static assets and index.html
+
 ## Setup & Installation
 
 1. **Clone the repository:**
@@ -48,32 +57,15 @@ A modern, full-featured translation and language enhancement web app built with 
    yarn build
    ```
 
-5. **Preview production build:**
-   ```cmd
-   yarn preview
-   ```
+## Related Repositories
 
-## How to Use
-
-- Enter or record text in the source panel (up to 500 words).
-- Select source and target languages.
-- Click the mic button to start speech-to-text (first click requests permission, second opens modal).
-- Click any word for details/definitions.
-- Use the shortcut modal for keyboard help.
+- [Bless Function Module](../bless) – Blockless function backend
+- [Bless Server](../server) – AI-powered backend APIs
 
 ## License
 
-This project is for hackathon/demo purposes. For any production or open-source use, please add your own license file.
-
-## Credits
-- [React](https://react.dev/)
-- [Vite](https://vitejs.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Redux Toolkit](https://redux-toolkit.js.org/)
-- [Radix UI](https://www.radix-ui.com/)
-- [Lucide Icons](https://lucide.dev/)
-- [Google Fonts - Open Sans](https://fonts.google.com/specimen/Open+Sans)
+MIT
 
 ---
 
-For backend/server setup, see the `../server` directory.
+> [GitHub Repository](https://github.com/your-org/bless-hackathon-client)
