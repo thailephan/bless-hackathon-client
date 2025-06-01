@@ -1,54 +1,78 @@
-# React + TypeScript + Vite
+# Bless Hackathon Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-featured translation and language enhancement web app built with React, Vite, TypeScript, Tailwind CSS v4, and Redux Toolkit.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Modern UI/UX**: Responsive, accessible, and beautiful interface using Tailwind CSS v4 and Open Sans font.
+- **Speech-to-Text**: Record speech, transcribe to text, and use in translation workflows. Microphone permission confirmation and modal UI for recording.
+- **Text-to-Speech**: Listen to translations or input text in supported languages.
+- **Translation**: Translate between English and Vietnamese (and variants) with automatic API calls on language change.
+- **Word Details & Definitions**: Click any word to view its definition, part of speech, meaning, synonyms, antonyms, and IPA pronunciation.
+- **Redux Toolkit Caching**: Word details API responses are cached in Redux for fast, offline-friendly lookups.
+- **Shortcuts & Accessibility**: Keyboard shortcut modal and accessible components throughout.
+- **Radix UI**: Uses Radix UI primitives for dialogs, popovers, tooltips, and more.
+- **Mobile Friendly**: Optimized for both desktop and mobile devices.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** + **Vite**
+- **TypeScript**
+- **Tailwind CSS v4** (with Open Sans font)
+- **Redux Toolkit** for state management
+- **Radix UI** for accessible UI primitives
+- **Lucide React** for icons
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Setup & Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. **Clone the repository:**
+   ```cmd
+   git clone <your-repo-url>
+   cd bless-hackathon/client
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. **Install dependencies (Yarn required):**
+   ```cmd
+   yarn install
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+3. **Start the development server:**
+   ```cmd
+   yarn dev
+   ```
+   The app will be available at `http://localhost:5173` by default.
+
+4. **Build for production:**
+   ```cmd
+   yarn build
+   ```
+
+5. **Preview production build:**
+   ```cmd
+   yarn preview
+   ```
+
+## How to Use
+
+- Enter or record text in the source panel.
+- Select source and target languages.
+- Click the mic button to start speech-to-text (first click requests permission, second opens modal).
+- Click any word for details/definitions.
+- Use the shortcut modal for keyboard help.
+
+## License
+
+This project is for hackathon/demo purposes. For any production or open-source use, please add your own license file.
+
+## Credits
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Radix UI](https://www.radix-ui.com/)
+- [Lucide Icons](https://lucide.dev/)
+- [Google Fonts - Open Sans](https://fonts.google.com/specimen/Open+Sans)
+
+---
+
+For backend/server setup, see the `../server` directory.
