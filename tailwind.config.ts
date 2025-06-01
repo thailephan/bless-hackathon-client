@@ -2,15 +2,15 @@ import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
-    darkMode: ["class"],
+    darkMode: "class",
     content: [
 		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/*.{js,ts,jsx,tsx,mdx}",
+		"./src/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
 		extend: {
-			fontFamily: { // Added fontFamily
-				sans: ['var(--font-open-sans)', 'sans-serif'],
+			fontFamily: {
+				sans: ['var(--font-open-sans)', 'Open Sans', 'sans-serif'],
 			},
 			colors: {
 				background: 'hsl(var(--background))',

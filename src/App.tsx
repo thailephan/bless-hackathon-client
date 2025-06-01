@@ -9,6 +9,9 @@ import { LanguageSelector } from '@/components/translation/LanguageSelector';
 import { EnhanceCard } from '@/components/translation/EnhanceCard';
 import { NavigationBar } from '@/components/layout/NavigationBar';
 import { ShortcutModal } from '@/components/shortcut/ShortcutModal';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '@/store/store';
+import { setWordDetails } from '@/store/slices/wordDetailsSlice';
 
 interface TranslateTextOutput {
   translatedText: string;
@@ -68,6 +71,8 @@ export default function App() {
   const throttleTimeoutRef = useRef<number | null>(null); // Fix for setTimeout ref type in browser
 
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
+  const wordDetailsCache = useSelector((state: RootState) => state.wordDetails.cache);
 
   useEffect(() => {
     audioPlayerRef.current = new Audio();
@@ -517,24 +522,32 @@ export default function App() {
     if (!word.trim()) return;
     const cleanedWord = word.replace(/[.,!?;:"“”（）]/g, "").trim().toLowerCase();
     if (!cleanedWord) return;
-    setActiveWordForDefinition(word); 
+    const cacheKey = `${cleanedWord}_${language}`;
+    setActiveWordForDefinition(word);
     setIsWordDetailLoading(true);
     setCurrentWordDetails(null);
+    // Check cache first
+    if (wordDetailsCache[cacheKey]) {
+      setCurrentWordDetails(wordDetailsCache[cacheKey]);
+      setIsWordDetailLoading(false);
+      return;
+    }
     try {
       const response = await fetch(`${API_BASE_URL}/api/get-word-details`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ word: cleanedWord, language }), 
+        body: JSON.stringify({ word: cleanedWord, language }),
       });
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: `Word details API request failed: ${response.statusText} (${response.status})` }));
         throw new Error(errorData.error || `Word details API request failed: ${response.statusText} (${response.status})`);
       }
       const result: GetWordDetailsOutput = await response.json();
-      if (result.ipaPronunciation === undefined) { // Ensure ipaPronunciation is at least an empty string
+      if (result.ipaPronunciation === undefined) {
         result.ipaPronunciation = '';
       }
       setCurrentWordDetails(result);
+      dispatch(setWordDetails({ key: cacheKey, details: result }));
     } catch (error) {
       console.error('Word definition error:', error);
       let description = `An unexpected error occurred while fetching details for "${cleanedWord}".`;
@@ -555,7 +568,7 @@ export default function App() {
     } finally {
       setIsWordDetailLoading(false);
     }
-  }, [toast]);
+  }, [toast, wordDetailsCache, dispatch]);
 
   const handleWordPopoverClose = useCallback(() => {
     // setActiveWordForDefinition(null); // Optionally clear active word when popover closes
@@ -591,31 +604,31 @@ export default function App() {
 
   const handleSourceLanguageChange = (lang: LanguageCode) => {
     setSourceLanguage(lang);
-    setEnhanceCardResetKey(prev => prev + 1); 
+    setEnhanceCardResetKey(prev => prev + 1);
 
     if (sourceText.trim()) {
-      if (lang === targetLanguage) {
-        setTranslatedText(sourceText); 
-      } else {
-        setTranslatedText(''); 
-      }
+      handleTranslateText({
+        text: sourceText,
+        srcLang: lang,
+        tgtLang: targetLanguage,
+      });
     } else {
-      setTranslatedText(''); 
+      setTranslatedText('');
     }
   };
 
   const handleTargetLanguageChange = (lang: LanguageCode) => {
     setTargetLanguage(lang);
-    setEnhanceCardResetKey(prev => prev + 1); 
+    setEnhanceCardResetKey(prev => prev + 1);
 
     if (sourceText.trim()) {
-      if (sourceLanguage === lang) {
-        setTranslatedText(sourceText); 
-      } else {
-        setTranslatedText(''); 
-      }
+      handleTranslateText({
+        text: sourceText,
+        srcLang: sourceLanguage,
+        tgtLang: lang,
+      });
     } else {
-        setTranslatedText(''); 
+      setTranslatedText('');
     }
   };
 
