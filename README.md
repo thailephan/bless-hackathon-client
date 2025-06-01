@@ -13,6 +13,7 @@ A modern, full-featured translation and language enhancement web app built with 
 - **Shortcuts & Accessibility**: Keyboard shortcut modal and accessible components throughout.
 - **Radix UI**: Uses Radix UI primitives for dialogs, popovers, tooltips, and more.
 - **Mobile Friendly**: Optimized for both desktop and mobile devices.
+- **Increased Word Limit**: You can now type or paste up to **500 words** per translation (previously 200).
 
 ## Tech Stack
 
@@ -54,7 +55,7 @@ A modern, full-featured translation and language enhancement web app built with 
 
 ## How to Use
 
-- Enter or record text in the source panel.
+- Enter or record text in the source panel (up to 500 words).
 - Select source and target languages.
 - Click the mic button to start speech-to-text (first click requests permission, second opens modal).
 - Click any word for details/definitions.
