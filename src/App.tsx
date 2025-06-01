@@ -34,7 +34,7 @@ interface GetWordDetailsOutput {
 }
 
 
-import { Loader2, ArrowLeftRight, ArrowRight, Languages } from 'lucide-react';
+import { Loader2, ArrowLeftRight, ArrowRight, Languages, Sun, Moon } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/components/ui/tooltip';
@@ -56,6 +56,7 @@ export default function App() {
   const [isLoadingSourceTTS, setIsLoadingSourceTTS] = useState(false);
   const [isLoadingTargetTTS, setIsLoadingTargetTTS] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(document.body.classList.contains('dark'));
   const [isProcessingAudio, setIsProcessingAudio] = useState(false);
   const [isThrottled, setIsThrottled] = useState(false);
 
@@ -575,6 +576,12 @@ export default function App() {
   }, []);
 
 
+  const handleToggleDarkMode = () => {
+    const body = document.body;
+    body.classList.toggle('dark');
+    setIsDarkMode(body.classList.contains('dark'));
+  };
+
   const handleSourceTextChange = (newText: string) => {
     const words = newText.trim() === '' ? [] : newText.trim().split(/\s+/);
     let currentWordCount = words.length;
@@ -758,9 +765,24 @@ export default function App() {
 
         <footer className="text-center mt-6 md:mt-10 py-3 text-xs md:text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} LinguaCraft. AI-Powered Translation.</p>
-          <p className="text-xs">Click on a word in the translated text to see its details. Source text limited to {WORD_LIMIT} words. IPA pronunciation available for selected languages.</p>
+          <p className="text-xs">Click on a word in the translated text to see its details. Source text limited to {WORD_LIMIT} words.</p>
           <p className="text-xs">Press Ctrl + ? to view keyboard shortcuts. Press Ctrl + Enter to translate.</p>
         </footer>
+
+        {/* Dark Mode Toggle Button */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleToggleDarkMode}
+              className="fixed bottom-4 left-4 rounded-full p-2 shadow-lg hover:bg-accent transition-all"
+              aria-label="Toggle dark mode"
+            >{isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}</Button>
+          </TooltipTrigger>
+          <TooltipContent side="right"><p>Toggle Dark Mode</p></TooltipContent>
+        </Tooltip>
+
       </div>
     </TooltipProvider>
   );
