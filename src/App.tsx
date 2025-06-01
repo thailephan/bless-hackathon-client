@@ -40,7 +40,7 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/components/ui/tooltip';
 
 const THROTTLE_DURATION = 2000;
-const WORD_LIMIT = 200;
+const WORD_LIMIT = 500;
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
 
