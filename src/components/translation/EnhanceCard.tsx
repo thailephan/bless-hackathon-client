@@ -1,12 +1,11 @@
 
-'use client';
 /**
  * @fileOverview EnhanceCard.tsx - A component that provides tools for enhancing translated text.
  * It allows users to apply various AI-powered enhancements (like summarization, style changes)
  * to the current translated text by calling an external API.
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -65,7 +64,7 @@ export function EnhanceCard({
   const generateEnhancementRequestIdRef = useRef(0);
 
   const [enabledEnhancements, setEnabledEnhancements] = useState<{[key: string]: boolean}>(() => {
-    let initialPreferences: {[key: string]: boolean} = {};
+    const initialPreferences: {[key: string]: boolean} = {};
     enhancementChipOptions.forEach(opt => {
       initialPreferences[opt.label] = true;
     });
@@ -77,7 +76,7 @@ export function EnhanceCard({
           const parsed = JSON.parse(savedPreferences);
           if (typeof parsed === 'object' && parsed !== null) {
             Object.keys(initialPreferences).forEach(key => {
-                if (parsed.hasOwnProperty(key) && typeof parsed[key] === 'boolean') {
+                if (Object.prototype.hasOwnProperty.call(parsed, key) && typeof parsed[key] === 'boolean') {
                     initialPreferences[key] = parsed[key];
                 }
             });
@@ -171,7 +170,7 @@ export function EnhanceCard({
       setCopiedStates(prev => ({ ...Object.fromEntries(Object.keys(prev).map(k => [k, false])), [id]: true }));
       setTimeout(() => setCopiedStates(prev => ({ ...prev, [id]: false })), 2000);
       toast({ title: 'Copied!', description: 'Text copied to clipboard.' });
-    }).catch(err => {
+    }).catch(_ => {
       toast({ title: 'Copy Failed', description: 'Could not copy text.', variant: 'destructive' });
     });
   };
@@ -292,13 +291,13 @@ export function EnhanceCard({
                   <p className="text-sm text-accent-foreground whitespace-pre-wrap">{processedEnhancedText}</p>
                 </ScrollArea>
                 <div className="flex gap-2 mt-2 flex-wrap">
-                  <Button variant="default" size="xs" onClick={() => handleApplyToMain(processedEnhancedText)}>
+                  <Button variant="default" size="sm" onClick={() => handleApplyToMain(processedEnhancedText)}>
                     Apply to Main
                   </Button>
-                  <Button variant="ghost" size="xs" onClick={() => handleCopyToClipboard(processedEnhancedText, 'enhanced')} className="text-muted-foreground hover:text-primary p-1">
+                  <Button variant="ghost" size="sm" onClick={() => handleCopyToClipboard(processedEnhancedText, 'enhanced')} className="text-muted-foreground hover:text-primary p-1">
                       {copiedStates['enhanced'] ? <Check className="h-3 w-3 text-green-500" /> : <Copy className="h-3 w-3" />}
                   </Button>
-                  <Button variant="outline" size="xs" onClick={() => { setProcessedEnhancedText(null); }} className="ml-auto">
+                  <Button variant="outline" size="sm" onClick={() => { setProcessedEnhancedText(null); }} className="ml-auto">
                     Clear
                   </Button>
                 </div>
