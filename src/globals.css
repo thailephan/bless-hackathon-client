@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 210 20% 98%; /* Light blue-gray, similar to Google's #f8f9fa */
+    --foreground: 210 10% 23%; /* Dark gray text, similar to Google's #3c4043 */
+
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 210 10% 23%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 10% 23%;
+
+    --primary: 211 90% 50%; /* Vibrant blue, similar to Google's #1a73e8 */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+
+    --secondary: 210 16% 93%; /* Light gray, #e8eaed */
+    --secondary-foreground: 210 10% 23%;
+
+    --muted: 210 16% 93%;
+    --muted-foreground: 210 7% 50%; /* Medium gray, #70757a */
+
+    --accent: 210 90% 96%; /* Very light blue for hover/accent, #e8f0fe */
+    --accent-foreground: 211 90% 45%; /* Darker blue for text on accent */
+
+    --destructive: 0 72% 51%; /* Standard red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 14% 89%; /* Gray border, #dadce0 */
+    --input: 210 14% 89%; /* Input border */
+    --ring: 211 90% 55%; /* Primary blue for focus rings */
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem; /* Increased for a slightly more rounded look */
+
+    /* Sidebar variables - updated to match new theme */
+    --sidebar-background: 210 16% 95%; /* Slightly off-white/light gray */
+    --sidebar-foreground: 210 10% 30%;
+    --sidebar-primary: 211 90% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 90% 90%; /* Lighter blue for sidebar accent */
+    --sidebar-accent-foreground: 211 90% 40%;
+    --sidebar-border: 210 14% 85%;
+    --sidebar-ring: 211 90% 55%;
+  }
+
+  .dark {
+    --background: 210 10% 12%; /* Very dark gray-blue */
+    --foreground: 210 20% 90%; /* Light gray text */
+
+    --card: 210 9% 16%; /* Darker card background */
+    --card-foreground: 210 20% 90%;
+
+    --popover: 210 9% 16%;
+    --popover-foreground: 210 20% 90%;
+
+    --primary: 211 90% 60%; /* Slightly lighter blue for dark mode */
+    --primary-foreground: 0 0% 100%; 
+
+    --secondary: 210 8% 20%; /* Dark gray */
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 210 8% 20%;
+    --muted-foreground: 210 10% 60%;
+
+    --accent: 210 90% 25%; /* Darker blue accent */
+    --accent-foreground: 210 20% 95%;
+
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 5% 30%; /* Darker gray border */
+    --input: 210 5% 30%;
+    --ring: 211 90% 60%; 
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Sidebar variables - dark theme */
+    --sidebar-background: 210 9% 14%;
+    --sidebar-foreground: 210 20% 88%;
+    --sidebar-primary: 211 90% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 90% 22%;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 210 5% 25%;
+    --sidebar-ring: 211 90% 60%;
+  }
+}
+
+/* @layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+} */
